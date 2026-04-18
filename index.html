@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSAN — 네덜란드 한국 학생회</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* 홈 전용 스타일 */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(232,104,42,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(232,104,42,0.08) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center; gap: 8px;
+    background: rgba(232,104,42,0.15);
+    border: 1px solid rgba(232,104,42,0.3);
+    border-radius: 100px;
+    padding: 6px 14px;
+    margin-bottom: 28px;
+  }
+
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero-badge span {
+    font-size: 12px;
+    color: var(--orange-light);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 0.95;
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .hero-title .accent { color: var(--orange); }
+
+  .hero-subtitle {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .hero-subtitle strong {
+    color: rgba(255,255,255,0.9);
+    font-weight: 500;
+  }
+
+  .hero-cta { display: flex; gap: 12px; }
+
+  .btn-hero-ghost {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.8);
+  }
+
+  .btn-hero-ghost:hover {
+    border-color: rgba(255,255,255,0.5);
+    color: white;
+  }
+
+  .hero-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 28px;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-card-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--orange);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero-stat {
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: white;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .hero-stat-num .stat-accent { color: var(--orange); }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .hero-tag {
+    padding: 6px 12px;
+    background: rgba(232,104,42,0.12);
+    border: 1px solid rgba(232,104,42,0.2);
+    border-radius: 100px;
+    font-size: 11px;
+    color: var(--orange-light);
+  }
+
+  /* WHY */
+  .why { background: var(--light); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .why-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 24px;
+    border: 1px solid var(--border);
+  }
+
+  .why-icon {
+    width: 48px; height: 48px;
+    background: var(--orange-pale);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    font-size: 22px;
+  }
+
+  .why-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .why-card p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  /* SOLUTION */
+  .solution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .solution-card {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .solution-card:hover { transform: translateY(-4px); }
+
+  .solution-card-header {
+    padding: 24px;
+    background: var(--orange);
+  }
+
+  .solution-card:nth-child(2) .solution-card-header { background: var(--black); }
+  .solution-card:nth-child(3) .solution-card-header { background: var(--green); }
+
+  .solution-card-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  .solution-card-header h3 {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 4px;
+  }
+
+  .solution-card-header span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .solution-card-body {
+    padding: 20px 24px;
+    background: white;
+  }
+
+  .solution-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .solution-item:last-child { margin-bottom: 0; }
+
+  .solution-dot {
+    width: 5px; height: 5px;
+    background: var(--orange);
+    border-radius: 50%;
+    margin-top: 7px; flex-shrink: 0;
+  }
+
+  .solution-card:nth-child(2) .solution-dot { background: var(--black); }
+  .solution-card:nth-child(3) .solution-dot { background: var(--green); }
+
+  .solution-item p {
+    font-size: 13px;
+    color: #444;
+  }
+
+  /* GUIDE PREVIEW */
+  .guide-preview {
+    background: var(--orange-pale);
+  }
+
+  .guide-preview-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .guide-cats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+
+  .guide-cat {
+    background: white;
+    padding: 20px 16px;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+
+  .guide-cat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  }
+
+  .guide-cat-icon { font-size: 28px; margin-bottom: 8px; }
+  .guide-cat-name { font-size: 13px; font-weight: 500; }
+
+  /* EVENTS */
+  .events-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .event-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .event-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  .event-image {
+    height: 180px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+
+  .event-card:nth-child(2) .event-image {
+    background: linear-gradient(135deg, var(--black), var(--dark));
+  }
+
+  .event-date {
+    position: absolute; top: 16px; left: 16px;
+    background: white;
+    color: var(--black);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-family: 'Noto Sans KR';
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .event-body { padding: 20px 24px; }
+
+  .event-body h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .event-body p {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 16px;
+  }
+
+  /* PARTNERS */
+  .partners-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .partner-chip {
+    padding: 10px 18px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--orange);
+    text-align: center;
+    padding: 80px 48px;
+  }
+
+  .cta-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: white;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+
+  .cta-section p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 32px;
+  }
+
+  .btn-cta {
+    padding: 16px 36px;
+    background: white;
+    color: var(--orange);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+
+  .btn-cta:hover { transform: translateY(-2px); }
+
+  @media (max-width: 768px) {
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-title { font-size: 56px; }
+    .why-grid, .solution-grid { grid-template-columns: 1fr; }
+    .guide-preview-inner { grid-template-columns: 1fr; }
+    .events-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-box"><span>K</span></div>
+    <span class="nav-logo-text">네덜란드 한국 학생회</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">홈</a></li>
+    <li><a href="guide.html">정착 가이드</a></li>
+    <li><a href="business.html">Business Hub</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="events.html">이벤트</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-actions">
+    <!-- shared.js가 자동 채움 -->
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div>
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span>KSAN DIGITAL HUB — BETA</span>
+        </div>
+        <h1 class="hero-title">
+          네덜란드<br>
+          생활의 모든<br>
+          <span class="accent">연결.</span>
+        </h1>
+        <p class="hero-subtitle">
+          비즈니스 네트워킹부터 <strong>중고 나눔</strong>, 고민 상담까지.<br>
+          네덜란드 한인 유학생의 모든 것, 한 번에.
+        </p>
+        <div class="hero-cta">
+          <a href="signup.html" class="btn btn-primary btn-lg">멤버십 가입하기</a>
+          <a href="#why" class="btn btn-hero-ghost btn-lg">둘러보기 →</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-label">KSAN 디지털 허브 현황</div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">500<span class="stat-accent">+</span></div>
+            <div class="hero-stat-label">네덜란드 한인 학생</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">6<span class="stat-accent">회</span></div>
+            <div class="hero-stat-label">연간 대규모 행사</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">20<span class="stat-accent">+</span></div>
+            <div class="hero-stat-label">파트너 기업</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">3<span class="stat-accent">개</span></div>
+            <div class="hero-stat-label">주요 도시 커버</div>
+          </div>
+        </div>
+        <div class="hero-tags">
+          <span class="hero-tag">💼 Business Hub</span>
+          <span class="hero-tag">💬 Community</span>
+          <span class="hero-tag">🎁 Pass It On</span>
+          <span class="hero-tag">✈️ 항공 공동구매</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="section-label">WHY NOW?</div>
+    <h2 class="section-title">왜 지금,<br>KSAN 디지털 플랫폼인가?</h2>
+    <p class="section-desc">유학생들이 매일 겪는 세 가지 문제, KSAN이 해결합니다.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🗂️</div>
+        <h3>정보의 파편화</h3>
+        <p>공지는 카카오톡, 채용은 웹사이트, 중고거래는 개인카톡… 흩어진 정보 속에서 정작 필요한 공고를 놓치고 있습니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔒</div>
+        <h3>낮은 접근성</h3>
+        <p>네덜란드 현지 기업 채용 정보나 알바 정보는 아는 사람만 아는 <strong>인맥 위주</strong>로 흐릅니다. 공정한 접근 기회가 필요합니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💭</div>
+        <h3>심리적 문턱</h3>
+        <p>유학생들의 고민과 질문은 많지만, 익명으로 안전하게 공유하고 해결할 수 있는 공식 플랫폼은 부재합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section>
+  <div class="container">
+    <div class="section-label">OUR SOLUTION</div>
+    <h2 class="section-title">네덜란드 한인 유학생의<br>생활 · 커리어 · 연결을 하나로</h2>
+
+    <div class="solution-grid">
+      <a href="business.html" class="solution-card">
+        <div class="solution-card-header">
+          <div class="solution-card-icon">💼</div>
+          <h3>Business Hub</h3>
+          <span>검증된 파트너십을 통한 커리어 브릿지</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-item">
+            <div class="solution-dot"></div>
+            <p>KSAN Verified 공고 — 검증된 채용 정보</p>
+          </div>
+          <div class="solution-item">
+            <div class="solution-dot"></div>
+            <p>삼성, LG 등 현지 파트너 기업과의 공식 연결</p>
+          </div>
+          <div class="solution-item">
+            <div class="solution-dot"></div>
+            <p>한국어학교 알바, 네덜란드 한인 기업 구인</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="community.html" class="solution-card">
+        <div class="solution-card-header">
+          <div class="solution-card-icon">💬</div>
+          <h3>Community</h3>
+          <span>안전한 정보 공유의 장</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-item">
+            <div class="solution-dot"></div>
+            <p>익명 고민 상담 — 사소한 질문부터 진로 고민까지</p>
+          </div>
+          <div class="solution-item">
+            <div class="solution-dot"></div>
+            <p>유학 준비생 Q&A (재학생/Alumni 답변)</p>
+          </div>
+          <div class="solution-item">
+            <div class="solution-dot"></div>
+            <p>자유게시판 및 팁 아카이브</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="pass-it-on.html" class="solution-card">
+        <div class="solution-card-header">
+          <div class="solution-card-icon">🎁</div>
+          <h3>Pass It On</h3>
+          <span>졸업생 → 신입생 무료 나눔</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-item">
+            <div class="solution-dot"></div>
+            <p>학교 인증 기반 안전한 나눔 커뮤니티</p>
+          </div>
+          <div class="solution-item">
+            <div class="solution-dot"></div>
+            <p>이사·졸업 나눔으로 정착 비용 절감</p>
+          </div>
+          <div class="solution-item">
+            <div class="solution-dot"></div>
+            <p>돈 거래 없는 100% 무료 나눔</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE PREVIEW -->
+<section class="guide-preview">
+  <div class="container">
+    <div class="guide-preview-inner">
+      <div>
+        <div class="section-label">NEWCOMER?</div>
+        <h2 class="section-title">네덜란드에<br>처음 오셨나요?</h2>
+        <p class="section-desc mb-24">
+          BSN 발급부터 집 구하기까지,<br>
+          유학생이 꼭 알아야 할 정보를 한 곳에 정리했습니다.
+        </p>
+        <a href="guide.html" class="btn btn-primary btn-lg">가이드 전체 보기 →</a>
+      </div>
+      <div class="guide-cats">
+        <a href="guide.html" class="guide-cat">
+          <div class="guide-cat-icon">🏛️</div>
+          <div class="guide-cat-name">행정</div>
+        </a>
+        <a href="guide.html" class="guide-cat">
+          <div class="guide-cat-icon">💳</div>
+          <div class="guide-cat-name">금융</div>
+        </a>
+        <a href="guide.html" class="guide-cat">
+          <div class="guide-cat-icon">🏠</div>
+          <div class="guide-cat-name">주거</div>
+        </a>
+        <a href="guide.html" class="guide-cat">
+          <div class="guide-cat-icon">🚋</div>
+          <div class="guide-cat-name">교통</div>
+        </a>
+        <a href="guide.html" class="guide-cat">
+          <div class="guide-cat-icon">🛒</div>
+          <div class="guide-cat-name">쇼핑</div>
+        </a>
+        <a href="guide.html" class="guide-cat">
+          <div class="guide-cat-icon">🚨</div>
+          <div class="guide-cat-name">비상연락</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section>
+  <div class="container">
+    <div class="section-label">EVENTS</div>
+    <h2 class="section-title">곧 열리는 이벤트</h2>
+
+    <div class="events-grid">
+      <a href="events.html" class="event-card">
+        <div class="event-image">
+          <div class="event-date">2026.05.09</div>
+          제6회 체육대회
+        </div>
+        <div class="event-body">
+          <h3>폭싹 뛰었수다 🏃</h3>
+          <p>USC Universum Science Park · Amsterdam</p>
+          <span class="btn btn-ghost">신청하기 →</span>
+        </div>
+      </a>
+      <a href="events.html" class="event-card">
+        <div class="event-image">
+          <div class="event-date">2026.06.XX</div>
+          여름 네트워킹 파티
+        </div>
+        <div class="event-body">
+          <h3>Summer Night 🌃</h3>
+          <p>장소 미정 · 곧 공개 예정</p>
+          <span class="btn btn-ghost">알림 받기 →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="why">
+  <div class="container">
+    <div class="section-label">PARTNERS</div>
+    <h2 class="section-title">함께하는 파트너사</h2>
+    <p class="section-desc">KSAN과 함께 네덜란드 한인 유학생을 지원하는 기업·기관들입니다.</p>
+
+    <div class="partners-list">
+      <div class="partner-chip">🏬 신라마켓</div>
+      <div class="partner-chip">📱 LG Electronics</div>
+      <div class="partner-chip">💻 Samsung</div>
+      <div class="partner-chip">🌐 NordVPN</div>
+      <div class="partner-chip">🎵 JBL</div>
+      <div class="partner-chip">💡 Philips</div>
+      <div class="partner-chip">🏛️ 주네덜란드 한국대사관</div>
+      <div class="partner-chip">✈️ 대한항공</div>
+      <div class="partner-chip">🏫 네덜란드 한글학교</div>
+      <div class="partner-chip">🤝 네덜란드 한인회</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>지금 바로 시작하세요</h2>
+  <p>네덜란드 생활, KSAN과 함께라면 혼자가 아닙니다.</p>
+  <a href="signup.html" class="btn-cta">KSAN 멤버십 가입하기 →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <div>
+        <span class="footer-logo-box"><span>K</span></span>
+        <span style="color: white; font-size: 15px; font-weight: 500;">KSAN</span>
+      </div>
+      <p>네덜란드 한국 학생회<br>The Korean Student Association in the Netherlands</p>
+    </div>
+    <div class="footer-col">
+      <h4>SERVICES</h4>
+      <ul>
+        <li><a href="guide.html">정착 가이드</a></li>
+        <li><a href="business.html">Business Hub</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="pass-it-on.html">Pass It On</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>KSAN</h4>
+      <ul>
+        <li><a href="about.html">About KSAN</a></li>
+        <li><a href="events.html">이벤트</a></li>
+        <li><a href="#">파트너</a></li>
+        <li><a href="#">연락처</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACT</h4>
+      <ul>
+        <li><a href="#">info@ksan.nl</a></li>
+        <li><a href="#">@ksan.nl (Instagram)</a></li>
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보처리방침</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 KSAN. All rights reserved.</div>
+    <div>Rotterdam · Amsterdam · Eindhoven</div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

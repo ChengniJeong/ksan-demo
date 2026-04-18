@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원가입 — KSAN</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { background: var(--light); }
+  
+  .signup-wrapper {
+    min-height: calc(100vh - 64px);
+    padding: 40px 20px;
+  }
+
+  .signup-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+  }
+
+  .signup-left {
+    padding: 40px 0;
+  }
+
+  .signup-left h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 1.5px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .signup-left p {
+    color: var(--gray);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .tier-card {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tier-card:hover, .tier-card.active {
+    border-color: var(--orange);
+    background: var(--orange-pale);
+  }
+
+  .tier-card .tier-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .tier-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .tier-card .tier-price {
+    font-family: 'Bebas Neue', sans-serif;
+    color: var(--orange);
+    font-size: 20px;
+  }
+
+  .tier-card p {
+    font-size: 12px;
+    color: var(--gray);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .signup-right {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  }
+
+  .signup-right h2 {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  .signup-right .subtitle {
+    color: var(--gray);
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .email-group {
+    display: flex;
+    gap: 8px;
+  }
+
+  .email-group input { flex: 1; }
+
+  .email-verify {
+    padding: 0 16px;
+    background: var(--black);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+
+  .auth-footer {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  .auth-footer a { color: var(--orange); font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .signup-container { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-box"><span>K</span></div>
+    <span class="nav-logo-text">네덜란드 한국 학생회</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">홈</a></li>
+    <li><a href="guide.html">정착 가이드</a></li>
+    <li><a href="business.html">Business Hub</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="events.html">이벤트</a></li>
+  </ul>
+  <div class="nav-actions"></div>
+</nav>
+
+<div class="signup-wrapper">
+  <div class="signup-container">
+    <div class="signup-left">
+      <h1>KSAN<br>멤버십 가입</h1>
+      <p>본인에게 맞는 등급을 선택하세요.<br>언제든 업그레이드 가능합니다.</p>
+
+      <div class="tier-card" onclick="selectTier(this, 'guest')">
+        <div class="tier-head">
+          <h3>🌱 Guest</h3>
+          <div class="tier-price">무료</div>
+        </div>
+        <p>유학 준비생 / 일반 이용자<br>정착 가이드 · Q&A 질문 가능</p>
+      </div>
+
+      <div class="tier-card active" onclick="selectTier(this, 'student')">
+        <div class="tier-head">
+          <h3>🎓 Student</h3>
+          <div class="tier-price">€15</div>
+        </div>
+        <p>네덜란드 재학생<br>모든 기능 + 행사 할인</p>
+      </div>
+
+      <div class="tier-card" onclick="selectTier(this, 'alumni')">
+        <div class="tier-head">
+          <h3>🎉 Alumni</h3>
+          <div class="tier-price">무료</div>
+        </div>
+        <p>KSAN 졸업생 · 기존 Student 회원만 전환 가능</p>
+      </div>
+    </div>
+
+    <div class="signup-right">
+      <h2>정보 입력</h2>
+      <p class="subtitle">선택하신 등급: <strong id="selectedTier" style="color: var(--orange);">🎓 Student</strong></p>
+
+      <form onsubmit="handleSignup(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>이름</label>
+            <input type="text" placeholder="홍길동" required>
+          </div>
+          <div class="form-group">
+            <label>영문 이름</label>
+            <input type="text" placeholder="Hong Gildong" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>이메일</label>
+          <div class="email-group">
+            <input type="email" placeholder="your@email.com" required>
+            <button type="button" class="email-verify">인증번호 받기</button>
+          </div>
+          <p class="hint">Student는 네덜란드 대학 이메일(.nl) 인증이 필요합니다</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>비밀번호</label>
+            <input type="password" placeholder="8자 이상" required>
+          </div>
+          <div class="form-group">
+            <label>비밀번호 확인</label>
+            <input type="password" placeholder="한 번 더 입력" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>학교</label>
+            <select required>
+              <option value="">선택하세요</option>
+              <option>University of Amsterdam</option>
+              <option>Erasmus University Rotterdam</option>
+              <option>Delft University of Technology</option>
+              <option>Leiden University</option>
+              <option>Utrecht University</option>
+              <option>Eindhoven University of Technology</option>
+              <option>Tilburg University</option>
+              <option>기타</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>거주 도시</label>
+            <select required>
+              <option value="">선택하세요</option>
+              <option>Amsterdam</option>
+              <option>Rotterdam</option>
+              <option>Den Haag</option>
+              <option>Utrecht</option>
+              <option>Eindhoven</option>
+              <option>Leiden</option>
+              <option>Delft</option>
+              <option>기타</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" required>
+            <span style="font-size: 13px; color: var(--gray); margin-left: 6px;">
+              <a href="#" style="color: var(--orange);">이용약관</a> 및 
+              <a href="#" style="color: var(--orange);">개인정보처리방침</a>에 동의합니다
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-full">
+          €15 결제하고 가입 완료 →
+        </button>
+
+        <p style="font-size: 11px; color: var(--gray); text-align: center; margin-top: 12px;">
+          Stripe를 통해 안전하게 결제됩니다
+        </p>
+      </form>
+
+      <div class="auth-footer">
+        이미 회원이신가요? <a href="login.html">로그인</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+  let selectedTier = 'student';
+  
+  function selectTier(el, tier) {
+    document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    selectedTier = tier;
+    const tierName = {
+      guest: '🌱 Guest',
+      student: '🎓 Student',
+      alumni: '🎉 Alumni'
+    };
+    document.getElementById('selectedTier').textContent = tierName[tier];
+    
+    // 가격 버튼 텍스트 업데이트
+    const submitBtn = document.querySelector('button[type="submit"]');
+    if (tier === 'guest') {
+      submitBtn.innerHTML = '무료로 가입하기 →';
+    } else if (tier === 'alumni') {
+      submitBtn.innerHTML = 'Alumni 전환 신청 →';
+    } else {
+      submitBtn.innerHTML = '€15 결제하고 가입 완료 →';
+    }
+  }
+
+  function handleSignup(e) {
+    e.preventDefault();
+    alert(`가입 완료! (데모)\n등급: ${selectedTier}\n\n실제 서비스에서는 이메일 인증 후 가입됩니다.`);
+    simulateLogin(selectedTier, '신규회원');
+  }
+</script>
+</body>
+</html>

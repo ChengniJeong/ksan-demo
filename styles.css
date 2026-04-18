@@ -1,0 +1,493 @@
+/* KSAN Platform — Shared Styles */
+
+:root {
+  --orange: #E8682A;
+  --orange-light: #F28C5E;
+  --orange-pale: #FDF0E8;
+  --orange-dark: #C85A20;
+  --black: #111111;
+  --dark: #1A1A1A;
+  --gray: #666666;
+  --gray-light: #888888;
+  --border: #E5E5E5;
+  --light: #F5F5F5;
+  --white: #FFFFFF;
+  --green: #2D6A4F;
+  --red: #DC3545;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans KR', 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* =========== NAV =========== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo-box {
+  width: 36px; height: 36px;
+  background: var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+}
+
+.nav-logo-box span {
+  color: white;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.nav-logo-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray);
+  letter-spacing: 0.3px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--orange);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* =========== BUTTONS =========== */
+.btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid transparent;
+}
+
+.btn-outline {
+  border-color: var(--black);
+  background: transparent;
+  color: var(--black);
+}
+
+.btn-outline:hover {
+  background: var(--black);
+  color: white;
+}
+
+.btn-primary {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--orange-dark);
+  border-color: var(--orange-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--black);
+}
+
+.btn-ghost:hover {
+  border-color: var(--black);
+}
+
+.btn-lg {
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+}
+
+/* =========== LAYOUT =========== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.container-narrow {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+section {
+  padding: 80px 0;
+}
+
+.section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--orange);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+/* =========== PAGE HEADER =========== */
+.page-header {
+  background: var(--light);
+  padding: 60px 0 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.page-header p {
+  font-size: 16px;
+  color: var(--gray);
+  max-width: 600px;
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+
+.breadcrumb a:hover { color: var(--orange); }
+
+/* =========== CARDS =========== */
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.2s;
+}
+
+.card:hover {
+  border-color: var(--orange);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+/* =========== BADGES =========== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.badge-verified {
+  background: var(--orange-pale);
+  color: var(--orange);
+}
+
+.badge-alumni {
+  background: #E3F2FD;
+  color: #1976D2;
+}
+
+.badge-new {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.badge-closed {
+  background: var(--light);
+  color: var(--gray);
+}
+
+/* =========== FORMS =========== */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--black);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+.form-group .hint {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 6px;
+}
+
+/* =========== FOOTER =========== */
+footer {
+  background: var(--dark);
+  padding: 48px 48px 32px;
+  color: rgba(255,255,255,0.6);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+.footer-brand p {
+  font-size: 13px;
+  margin-top: 12px;
+  line-height: 1.7;
+}
+
+.footer-col h4 {
+  font-size: 13px;
+  color: white;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col ul a {
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.footer-col ul a:hover {
+  color: var(--orange-light);
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.footer-logo-box {
+  width: 32px; height: 32px;
+  background: var(--orange);
+  border-radius: 7px;
+  display: inline-flex; align-items: center; justify-content: center;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.footer-logo-box span {
+  color: white;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+}
+
+/* =========== ACCESS CONTROL MESSAGE =========== */
+.access-locked {
+  background: var(--light);
+  border: 2px dashed var(--border);
+  border-radius: 16px;
+  padding: 48px 32px;
+  text-align: center;
+  margin: 32px 0;
+}
+
+.access-locked .lock-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.access-locked h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.access-locked p {
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+
+/* =========== MODAL =========== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 440px;
+  width: 90%;
+  text-align: center;
+}
+
+.modal h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.modal p {
+  color: var(--gray);
+  margin-bottom: 24px;
+}
+
+.modal-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+/* =========== USER INFO (마이페이지용) =========== */
+.user-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.user-badge.guest {
+  background: var(--light);
+  color: var(--gray);
+}
+
+.user-badge.student {
+  background: var(--orange-pale);
+  color: var(--orange);
+}
+
+.user-badge.alumni {
+  background: #E3F2FD;
+  color: #1976D2;
+}
+
+/* =========== UTILITIES =========== */
+.text-orange { color: var(--orange); }
+.text-gray { color: var(--gray); }
+.text-small { font-size: 13px; }
+.mb-8 { margin-bottom: 8px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-32 { margin-bottom: 32px; }
+.flex { display: flex; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+
+/* =========== RESPONSIVE =========== */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .container, .container-narrow { padding: 0 20px; }
+  .section-title { font-size: 32px; }
+  .page-header h1 { font-size: 36px; }
+  .footer-container { grid-template-columns: 1fr 1fr; }
+}

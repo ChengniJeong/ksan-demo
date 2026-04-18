@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>네덜란드 정착 가이드 — KSAN</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .guide-hero {
+    background: linear-gradient(135deg, var(--orange-pale), white);
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .guide-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    letter-spacing: 1.5px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .guide-hero p {
+    font-size: 17px;
+    color: var(--gray);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .search-box {
+    margin-top: 28px;
+    display: flex;
+    gap: 8px;
+    max-width: 500px;
+  }
+
+  .search-box input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+
+  .search-box input:focus {
+    outline: none;
+    border-color: var(--orange);
+  }
+
+  .search-box button {
+    padding: 0 24px;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .category-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: all 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .category-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .category-icon {
+    width: 52px; height: 52px;
+    background: var(--orange-pale);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+  }
+
+  .category-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .category-card p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .category-items {
+    list-style: none;
+    padding: 0;
+  }
+
+  .category-items li {
+    font-size: 12px;
+    color: var(--gray);
+    padding: 4px 0;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .category-items li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--orange);
+  }
+
+  /* Popular articles */
+  .popular-section {
+    background: var(--light);
+  }
+
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .article-card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .article-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-2px);
+  }
+
+  .article-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--orange);
+    background: var(--orange-pale);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .article-card h4 {
+    font-size: 15px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .article-card p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .article-meta {
+    font-size: 11px;
+    color: var(--gray-light);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Emergency */
+  .emergency {
+    background: #FEF2F2;
+    border-left: 4px solid var(--red);
+    padding: 24px;
+    border-radius: 12px;
+    margin-top: 40px;
+  }
+
+  .emergency h3 {
+    color: var(--red);
+    font-size: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .emergency-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .emergency-item {
+    background: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+
+  .emergency-item strong {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  .emergency-item span {
+    font-size: 14px;
+    color: var(--red);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .category-grid, .article-grid { grid-template-columns: 1fr; }
+    .emergency-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-box"><span>K</span></div>
+    <span class="nav-logo-text">네덜란드 한국 학생회</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">홈</a></li>
+    <li><a href="guide.html" class="active">정착 가이드</a></li>
+    <li><a href="business.html">Business Hub</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="events.html">이벤트</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-actions"></div>
+</nav>
+
+<section class="guide-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">홈</a> / <span>정착 가이드</span>
+    </div>
+    <h1>네덜란드 정착 가이드</h1>
+    <p>BSN 발급부터 집 구하기까지, 네덜란드 유학생이<br>꼭 알아야 할 정보를 한 곳에 정리했습니다.</p>
+    
+    <div class="search-box">
+      <input type="text" placeholder="🔍 무엇이 궁금하신가요? (예: BSN, 집 구하기, 은행)">
+      <button>검색</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">CATEGORIES</div>
+    <h2 class="section-title">카테고리별 가이드</h2>
+
+    <div class="category-grid">
+      <a href="guide-detail.html" class="category-card">
+        <div class="category-header">
+          <div class="category-icon">🏛️</div>
+          <h3>행정 · 비자</h3>
+        </div>
+        <p>입국 후 반드시 처리해야 할 행정 절차</p>
+        <ul class="category-items">
+          <li>BSN 발급 방법</li>
+          <li>시청(Gemeente) 등록</li>
+          <li>학생 비자 연장</li>
+          <li>IND 관련 서류</li>
+        </ul>
+      </a>
+
+      <a href="guide-detail.html" class="category-card">
+        <div class="category-header">
+          <div class="category-icon">💳</div>
+          <h3>금융 · 보험</h3>
+        </div>
+        <p>은행 개설, 건강보험, 세금 신고</p>
+        <ul class="category-items">
+          <li>은행 계좌 개설 (ING vs ABN)</li>
+          <li>건강보험 가입 (Zorgverzekering)</li>
+          <li>학생 할인 헬스케어</li>
+          <li>한국 송금 방법 비교</li>
+        </ul>
+      </a>
+
+      <a href="guide-detail.html" class="category-card">
+        <div class="category-header">
+          <div class="category-icon">🏠</div>
+          <h3>주거 · 집 구하기</h3>
+        </div>
+        <p>학교 기숙사부터 장기 임대까지</p>
+        <ul class="category-items">
+          <li>학교별 기숙사 정보</li>
+          <li>Kamernet, Pararius 사용법</li>
+          <li>집 사기 사기 피하는 법 ⚠️</li>
+          <li>계약서 체크리스트</li>
+        </ul>
+      </a>
+
+      <a href="guide-detail.html" class="category-card">
+        <div class="category-header">
+          <div class="category-icon">🚋</div>
+          <h3>교통</h3>
+        </div>
+        <p>대중교통, 자전거, 기차 여행</p>
+        <ul class="category-items">
+          <li>OV-chipkaart 발급</li>
+          <li>학생 할인 (Studentenreisproduct)</li>
+          <li>자전거 구입 · 보험</li>
+          <li>공항-시내 이동 방법</li>
+        </ul>
+      </a>
+
+      <a href="guide-detail.html" class="category-card">
+        <div class="category-header">
+          <div class="category-icon">🛒</div>
+          <h3>생활 · 쇼핑</h3>
+        </div>
+        <p>식재료, 한국 마트, 일상 쇼핑</p>
+        <ul class="category-items">
+          <li>한국 식재료 구입처</li>
+          <li>신라마켓 vs Toko</li>
+          <li>슈퍼마켓 가격 비교</li>
+          <li>온라인 쇼핑 (bol.com, Amazon)</li>
+        </ul>
+      </a>
+
+      <a href="guide-detail.html" class="category-card">
+        <div class="category-header">
+          <div class="category-icon">🚨</div>
+          <h3>비상 연락처</h3>
+        </div>
+        <p>응급 상황 대처 가이드</p>
+        <ul class="category-items">
+          <li>한국 대사관 연락처</li>
+          <li>응급 의료 (Huisarts, A&E)</li>
+          <li>경찰 · 소방 · 긴급번호</li>
+          <li>한인 커뮤니티 지원</li>
+        </ul>
+      </a>
+    </div>
+
+    <div class="emergency">
+      <h3>🚨 긴급 연락처 — 바로 확인</h3>
+      <p style="font-size: 13px; color: #555;">응급 상황 발생 시 아래 번호로 즉시 연락하세요.</p>
+      <div class="emergency-grid">
+        <div class="emergency-item">
+          <strong>긴급 (경찰·구급·소방)</strong>
+          <span>112</span>
+        </div>
+        <div class="emergency-item">
+          <strong>비응급 경찰</strong>
+          <span>0900-8844</span>
+        </div>
+        <div class="emergency-item">
+          <strong>한국 대사관</strong>
+          <span>+31 70 740 0200</span>
+        </div>
+        <div class="emergency-item">
+          <strong>영사 콜센터 (24h)</strong>
+          <span>+82 2 3210 0404</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="popular-section">
+  <div class="container">
+    <div class="section-label">POPULAR</div>
+    <h2 class="section-title">자주 찾는 가이드</h2>
+
+    <div class="article-grid">
+      <a href="guide-detail.html" class="article-card">
+        <span class="article-tag">행정</span>
+        <h4>BSN 신청부터 수령까지 A to Z</h4>
+        <p>Gemeente 예약부터 편지 수령까지 전체 프로세스 정리</p>
+        <div class="article-meta">
+          <span>👁 12,345 views</span>
+          <span>업데이트: 2026.03</span>
+        </div>
+      </a>
+
+      <a href="guide-detail.html" class="article-card">
+        <span class="article-tag">주거</span>
+        <h4>Kamernet 집 구하기 사기 피하는 법</h4>
+        <p>실제 사례로 보는 Red flag 10가지와 안전 체크리스트</p>
+        <div class="article-meta">
+          <span>👁 8,901 views</span>
+          <span>업데이트: 2026.04</span>
+        </div>
+      </a>
+
+      <a href="guide-detail.html" class="article-card">
+        <span class="article-tag">금융</span>
+        <h4>ING vs ABN AMRO 학생 계좌 비교</h4>
+        <p>수수료, 앱 사용성, 고객 응대까지 총정리</p>
+        <div class="article-meta">
+          <span>👁 7,234 views</span>
+          <span>업데이트: 2026.02</span>
+        </div>
+      </a>
+
+      <a href="guide-detail.html" class="article-card">
+        <span class="article-tag">교통</span>
+        <h4>Studentenreisproduct 신청 완벽 가이드</h4>
+        <p>학생 교통 할인권, 신청부터 충전까지</p>
+        <div class="article-meta">
+          <span>👁 6,543 views</span>
+          <span>업데이트: 2026.03</span>
+        </div>
+      </a>
+
+      <a href="guide-detail.html" class="article-card">
+        <span class="article-tag">생활</span>
+        <h4>암스테르담 한국 식재료 완벽 지도</h4>
+        <p>신라마켓, Toko, 한일상사... 어디가 제일 쌀까?</p>
+        <div class="article-meta">
+          <span>👁 5,812 views</span>
+          <span>업데이트: 2026.04</span>
+        </div>
+      </a>
+
+      <a href="guide-detail.html" class="article-card">
+        <span class="article-tag">행정</span>
+        <h4>IND 비자 연장 서류 체크리스트</h4>
+        <p>놓치기 쉬운 서류와 제출 타이밍</p>
+        <div class="article-meta">
+          <span>👁 4,623 views</span>
+          <span>업데이트: 2026.01</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <div>
+        <span class="footer-logo-box"><span>K</span></span>
+        <span style="color: white; font-size: 15px; font-weight: 500;">KSAN</span>
+      </div>
+      <p>네덜란드 한국 학생회<br>The Korean Student Association in the Netherlands</p>
+    </div>
+    <div class="footer-col">
+      <h4>SERVICES</h4>
+      <ul>
+        <li><a href="guide.html">정착 가이드</a></li>
+        <li><a href="business.html">Business Hub</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="pass-it-on.html">Pass It On</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>KSAN</h4>
+      <ul>
+        <li><a href="about.html">About KSAN</a></li>
+        <li><a href="events.html">이벤트</a></li>
+        <li><a href="#">파트너</a></li>
+        <li><a href="#">연락처</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACT</h4>
+      <ul>
+        <li><a href="#">info@ksan.nl</a></li>
+        <li><a href="#">@ksan.nl (Instagram)</a></li>
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#">개인정보처리방침</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 KSAN. All rights reserved.</div>
+    <div>Rotterdam · Amsterdam · Eindhoven</div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

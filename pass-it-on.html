@@ -7,34 +7,193 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  .placeholder-hero {
-    background: linear-gradient(135deg, var(--light), white);
-    padding: 80px 0;
-    text-align: center;
+  .pass-hero {
+    background: linear-gradient(135deg, #F28C5E, var(--orange));
+    color: white;
+    padding: 60px 0 50px;
   }
-  .placeholder-icon { font-size: 80px; margin-bottom: 24px; }
-  .placeholder-hero h1 {
+  .pass-hero h1 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 56px;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     margin-bottom: 16px;
   }
-  .placeholder-hero p {
+  .pass-hero p {
+    color: rgba(255,255,255,0.9);
     font-size: 17px;
-    color: var(--gray);
-    max-width: 500px;
-    margin: 0 auto 32px;
+    max-width: 600px;
     line-height: 1.7;
   }
-  .coming-soon {
-    display: inline-block;
-    padding: 8px 16px;
-    background: var(--orange-pale);
-    color: var(--orange);
-    border-radius: 20px;
+  .pass-values {
+    display: flex;
+    gap: 24px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+  .pass-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .filters-bar {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+  }
+  .filter-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filter-chip {
+    padding: 6px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    background: white;
     font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .filter-chip.active {
+    border-color: var(--orange);
+    background: var(--orange);
+    color: white;
+  }
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .item-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .item-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  }
+  .item-image {
+    height: 180px;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    position: relative;
+  }
+  .item-status {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
     font-weight: 600;
-    margin-bottom: 24px;
+    background: white;
+  }
+  .item-status.available {
+    color: var(--green);
+  }
+  .item-status.reserved {
+    color: #E65100;
+  }
+  .item-status.taken {
+    color: var(--gray);
+    opacity: 0.7;
+  }
+
+  .item-body {
+    padding: 16px;
+  }
+  .item-category {
+    font-size: 11px;
+    color: var(--orange);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .item-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .item-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  .how-it-works {
+    background: var(--light);
+    padding: 60px 0;
+    margin-top: 60px;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .step {
+    text-align: center;
+  }
+  .step-num {
+    width: 60px;
+    height: 60px;
+    background: var(--orange);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    margin: 0 auto 16px;
+  }
+  .step h4 {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .step p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  .post-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    padding: 16px 24px;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(232,104,42,0.4);
+    font-family: inherit;
+    z-index: 50;
+  }
+  .post-btn:hover { transform: translateY(-2px); }
+
+  @media (max-width: 768px) {
+    .item-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -56,15 +215,226 @@
   <div class="nav-actions"></div>
 </nav>
 
-<section class="placeholder-hero">
+<section class="pass-hero">
   <div class="container">
-    <div class="placeholder-icon">🎁</div>
-    <div class="coming-soon">🚧 2차 개발 예정</div>
-    <h1>Pass It On</h1>
-    <p>졸업생에서 신입생으로 이어지는 무료 나눔 게시판. 2차 개발 단계에서 구현 예정입니다.</p>
-    <a href="index.html" class="btn btn-primary btn-lg">홈으로 돌아가기</a>
+    <div class="breadcrumb" style="color: rgba(255,255,255,0.7);">
+      <a href="index.html" style="color: rgba(255,255,255,0.7);">홈</a> / <span>Pass It On</span>
+    </div>
+    <h1>Pass It On 🎁</h1>
+    <p>졸업생이 나누고, 신입생이 받아가는 무료 나눔 공간.<br>
+    네덜란드 정착 비용을 함께 줄여갑시다.</p>
+    
+    <div class="pass-values">
+      <div class="pass-value">💯 100% 무료 나눔</div>
+      <div class="pass-value">🔒 KSAN 멤버 전용</div>
+      <div class="pass-value">🚫 돈 거래 금지</div>
+      <div class="pass-value">♻️ 지속가능한 유학 생활</div>
+    </div>
   </div>
 </section>
+
+<div class="filters-bar">
+  <div class="container">
+    <div class="filter-chips">
+      <button class="filter-chip active">전체</button>
+      <button class="filter-chip">🛋️ 가구</button>
+      <button class="filter-chip">🍳 주방용품</button>
+      <button class="filter-chip">📚 책/학용품</button>
+      <button class="filter-chip">🚲 자전거</button>
+      <button class="filter-chip">🧥 의류</button>
+      <button class="filter-chip">⚡ 전자제품</button>
+      <button class="filter-chip">🪴 기타</button>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
+      <h2 style="font-size: 18px;">현재 나눔 중 <span style="color: var(--gray); font-weight: 400; font-size: 14px;">(23건)</span></h2>
+      <select style="padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; font-family: inherit;">
+        <option>최신순</option>
+        <option>도시별</option>
+      </select>
+    </div>
+
+    <div class="item-grid">
+      <div class="item-card">
+        <div class="item-image">
+          🛋️
+          <span class="item-status available">● 나눔 가능</span>
+        </div>
+        <div class="item-body">
+          <div class="item-category">🛋️ 가구</div>
+          <div class="item-title">이케아 소파 (3인용, 회색)</div>
+          <div class="item-meta">
+            <span>📍 Amsterdam</span>
+            <span>2시간 전</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-image">
+          🍳
+          <span class="item-status available">● 나눔 가능</span>
+        </div>
+        <div class="item-body">
+          <div class="item-category">🍳 주방용품</div>
+          <div class="item-title">전기밥솥 + 후라이팬 세트</div>
+          <div class="item-meta">
+            <span>📍 Rotterdam</span>
+            <span>5시간 전</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-image">
+          🚲
+          <span class="item-status reserved">● 예약중</span>
+        </div>
+        <div class="item-body">
+          <div class="item-category">🚲 자전거</div>
+          <div class="item-title">Gazelle 시티 자전거 (여성용)</div>
+          <div class="item-meta">
+            <span>📍 Utrecht</span>
+            <span>1일 전</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-image">
+          📚
+          <span class="item-status available">● 나눔 가능</span>
+        </div>
+        <div class="item-body">
+          <div class="item-category">📚 책/학용품</div>
+          <div class="item-title">경영학 원서 10권 (UvA 1학년)</div>
+          <div class="item-meta">
+            <span>📍 Amsterdam</span>
+            <span>1일 전</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-image">
+          🪴
+          <span class="item-status available">● 나눔 가능</span>
+        </div>
+        <div class="item-body">
+          <div class="item-category">🪴 기타</div>
+          <div class="item-title">책상 + 의자 + 스탠드 조명 (이사 나눔)</div>
+          <div class="item-meta">
+            <span>📍 Eindhoven</span>
+            <span>2일 전</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-image">
+          ⚡
+          <span class="item-status available">● 나눔 가능</span>
+        </div>
+        <div class="item-body">
+          <div class="item-category">⚡ 전자제품</div>
+          <div class="item-title">모니터 24인치 (Dell, 박스 있음)</div>
+          <div class="item-meta">
+            <span>📍 Delft</span>
+            <span>2일 전</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-image">
+          🧥
+          <span class="item-status available">● 나눔 가능</span>
+        </div>
+        <div class="item-body">
+          <div class="item-category">🧥 의류</div>
+          <div class="item-title">겨울 패딩 (Uniqlo, 여성 M)</div>
+          <div class="item-meta">
+            <span>📍 Amsterdam</span>
+            <span>3일 전</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-image">
+          🍚
+          <span class="item-status taken">● 나눔 완료</span>
+        </div>
+        <div class="item-body">
+          <div class="item-category">🍳 주방용품</div>
+          <div class="item-title">한국 냄비 + 수저 세트</div>
+          <div class="item-meta">
+            <span>📍 Rotterdam</span>
+            <span>4일 전</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-image">
+          🪴
+          <span class="item-status available">● 나눔 가능</span>
+        </div>
+        <div class="item-body">
+          <div class="item-category">🪴 기타</div>
+          <div class="item-title">이사 정리 - 여러 가지 (사진 참고)</div>
+          <div class="item-meta">
+            <span>📍 Leiden</span>
+            <span>5일 전</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how-it-works">
+  <div class="container">
+    <h2 style="font-size: 28px; text-align: center; margin-bottom: 8px;">이용 방법</h2>
+    <p style="text-align: center; color: var(--gray); font-size: 14px;">복잡하지 않아요. 3분이면 나눔 시작!</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>물품 등록</h4>
+        <p>사진 1-3장과 간단한 설명만 있으면 돼요. 5분이면 충분!</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>메시지 받기</h4>
+        <p>관심 있는 멤버가 DM을 보내면 서로 시간 조율해요.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>만나서 전달</h4>
+        <p>학교 근처나 편한 장소에서 만나 물건 전달. 돈은 절대 안 받아요.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>따뜻한 마무리</h4>
+        <p>잘 썼다는 후기와 고마움으로 마무리. 다음엔 당신이 나눠주세요!</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <p style="font-size: 13px; color: var(--gray); margin-bottom: 16px;">
+        <strong style="color: var(--red);">⚠️ 주의:</strong> 
+        돈을 요구하거나, 외부 사이트로 유도하는 경우 즉시 신고해주세요.
+      </p>
+    </div>
+  </div>
+</section>
+
+<button class="post-btn">✏️ 나눔 등록하기</button>
 
 <footer>
   <div class="footer-container">
@@ -89,11 +459,14 @@
       <ul>
         <li><a href="about.html">About KSAN</a></li>
         <li><a href="events.html">이벤트</a></li>
+        <li><a href="partners.html">파트너사</a></li>
+        <li><a href="team.html">임원진</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>CONTACT</h4>
       <ul>
+        <li><a href="contact.html">문의하기</a></li>
         <li><a href="#">info@ksan.nl</a></li>
       </ul>
     </div>

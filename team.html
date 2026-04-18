@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>임원진 — KSAN</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .team-hero {
+    background: linear-gradient(135deg, var(--orange), #D85E20);
+    color: white;
+    padding: 80px 0 60px;
+  }
+  .team-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+  .team-hero p {
+    color: rgba(255,255,255,0.9);
+    font-size: 17px;
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .leadership {
+    padding: 80px 0;
+  }
+  .leadership-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 800px;
+    margin: 40px auto 0;
+  }
+  .leader-card {
+    background: white;
+    border: 2px solid var(--orange);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    position: relative;
+  }
+  .leader-role {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 16px;
+    background: var(--orange);
+    color: white;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .leader-photo {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--orange-pale), #FCD5B5);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: var(--orange);
+    font-family: 'Bebas Neue', sans-serif;
+  }
+  .leader-card h3 {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  .leader-card .school {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 16px;
+  }
+  .leader-card .message {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .team-section {
+    padding: 80px 0;
+    background: var(--light);
+  }
+  .team-section:nth-child(even) { background: white; }
+
+  .team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .team-name {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .team-emoji-large {
+    font-size: 40px;
+  }
+  .team-name h2 {
+    font-size: 24px;
+    margin: 0;
+  }
+  .team-name p {
+    font-size: 13px;
+    color: var(--gray);
+    margin: 0;
+  }
+  .team-lead-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--black);
+    color: white;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .member-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .member-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-2px);
+  }
+  .member-card.leader {
+    background: var(--orange-pale);
+    border-color: var(--orange);
+  }
+  .member-photo {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #FDF0E8, #FCD5B5);
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--orange);
+  }
+  .member-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .member-role {
+    font-size: 11px;
+    color: var(--gray);
+  }
+  .leader-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--orange);
+    color: white;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  .join-section {
+    padding: 80px 0;
+    background: var(--black);
+    color: white;
+    text-align: center;
+  }
+  .join-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+  .join-section p {
+    color: rgba(255,255,255,0.8);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0 auto 24px;
+  }
+  .recruitment-status {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(232,104,42,0.2);
+    border: 1px solid var(--orange);
+    border-radius: 100px;
+    font-size: 12px;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .leadership-grid { grid-template-columns: 1fr; }
+    .members-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-box"><span>K</span></div>
+    <span class="nav-logo-text">네덜란드 한국 학생회</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">홈</a></li>
+    <li><a href="guide.html">정착 가이드</a></li>
+    <li><a href="business.html">Business Hub</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="events.html">이벤트</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-actions"></div>
+</nav>
+
+<section class="team-hero">
+  <div class="container">
+    <div class="breadcrumb" style="color: rgba(255,255,255,0.7);">
+      <a href="index.html" style="color: rgba(255,255,255,0.7);">홈</a> / <a href="about.html" style="color: rgba(255,255,255,0.7);">About</a> / <span>임원진</span>
+    </div>
+    <h1>MEET THE TEAM</h1>
+    <p>KSAN을 움직이는 28명의 임원들. 네덜란드 전역 8개 대학에서 모인 사람들입니다.</p>
+  </div>
+</section>
+
+<section class="leadership">
+  <div class="container">
+    <div style="text-align: center;">
+      <div class="section-label">LEADERSHIP</div>
+      <h2 class="section-title">2025-2026 회장단</h2>
+    </div>
+
+    <div class="leadership-grid">
+      <div class="leader-card">
+        <span class="leader-role">PRESIDENT</span>
+        <div class="leader-photo">N</div>
+        <h3>나유성</h3>
+        <p class="school">University of Amsterdam · 경영학</p>
+        <p class="message">"KSAN이 네덜란드 한인 유학생들에게 든든한 울타리가 될 수 있도록 노력하겠습니다."</p>
+      </div>
+      <div class="leader-card">
+        <span class="leader-role">VICE PRESIDENT</span>
+        <div class="leader-photo">K</div>
+        <h3>김성령</h3>
+        <p class="school">Erasmus University Rotterdam · IBA</p>
+        <p class="message">"외부 파트너십을 통해 KSAN의 가능성을 확장하는 데 집중하고 있습니다."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team-section">
+  <div class="container">
+    <div class="team-header">
+      <div class="team-name">
+        <span class="team-emoji-large">👥</span>
+        <div>
+          <h2>기획총괄팀</h2>
+          <p>행사 기획 및 당일 진행 총괄</p>
+        </div>
+      </div>
+      <span class="team-lead-badge">팀장: 정채연</span>
+    </div>
+
+    <div class="members-grid">
+      <div class="member-card leader">
+        <div class="member-photo">J</div>
+        <div class="member-name">정채연</div>
+        <div class="member-role">기획총괄팀장</div>
+        <span class="leader-tag">TEAM LEAD</span>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">H</div>
+        <div class="member-name">정희망</div>
+        <div class="member-role">Event Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">C</div>
+        <div class="member-name">최익준</div>
+        <div class="member-role">Event Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">K</div>
+        <div class="member-name">김종원</div>
+        <div class="member-role">Event Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">S</div>
+        <div class="member-name">손예빈</div>
+        <div class="member-role">Event Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">J</div>
+        <div class="member-name">조예은</div>
+        <div class="member-role">Event Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">L</div>
+        <div class="member-name">이민서</div>
+        <div class="member-role">Event Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">M</div>
+        <div class="member-name">문혜원</div>
+        <div class="member-role">Event Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">K</div>
+        <div class="member-name">김소진</div>
+        <div class="member-role">Event Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">J</div>
+        <div class="member-name">전민재</div>
+        <div class="member-role">Event Coordinator</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team-section">
+  <div class="container">
+    <div class="team-header">
+      <div class="team-name">
+        <span class="team-emoji-large">💼</span>
+        <div>
+          <h2>재무행정팀</h2>
+          <p>예산, 장소 섭외, 후원사 관리</p>
+        </div>
+      </div>
+      <span class="team-lead-badge">팀장 (비공개)</span>
+    </div>
+
+    <div class="members-grid">
+      <div class="member-card leader">
+        <div class="member-photo">?</div>
+        <div class="member-name">재행 팀장</div>
+        <div class="member-role">Finance & Admin Lead</div>
+        <span class="leader-tag">TEAM LEAD</span>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">재행 임원</div>
+        <div class="member-role">Finance Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">재행 임원</div>
+        <div class="member-role">Finance Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">재행 임원</div>
+        <div class="member-role">Admin Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">재행 임원</div>
+        <div class="member-role">Partnership Coordinator</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">재행 임원</div>
+        <div class="member-role">Reception Manager</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">재행 임원</div>
+        <div class="member-role">Admin Coordinator</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="team-section">
+  <div class="container">
+    <div class="team-header">
+      <div class="team-name">
+        <span class="team-emoji-large">📣</span>
+        <div>
+          <h2>PR / 마케팅팀</h2>
+          <p>홍보, SNS, 브랜딩, 콘텐츠 제작</p>
+        </div>
+      </div>
+      <span class="team-lead-badge">팀장 (비공개)</span>
+    </div>
+
+    <div class="members-grid">
+      <div class="member-card leader">
+        <div class="member-photo">?</div>
+        <div class="member-name">마케팅 팀장</div>
+        <div class="member-role">Marketing Lead</div>
+        <span class="leader-tag">TEAM LEAD</span>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">마케팅 임원</div>
+        <div class="member-role">Content Designer</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">마케팅 임원</div>
+        <div class="member-role">Content Designer</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">마케팅 임원</div>
+        <div class="member-role">Social Media Manager</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">마케팅 임원</div>
+        <div class="member-role">Social Media Manager</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">마케팅 임원</div>
+        <div class="member-role">Photographer</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">마케팅 임원</div>
+        <div class="member-role">Videographer</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">마케팅 임원</div>
+        <div class="member-role">Copywriter</div>
+      </div>
+      <div class="member-card">
+        <div class="member-photo">?</div>
+        <div class="member-name">마케팅 임원</div>
+        <div class="member-role">Brand Designer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="join-section">
+  <div class="container">
+    <span class="recruitment-status">● 2026-2027 임원 모집 준비 중</span>
+    <h2>JOIN THE TEAM</h2>
+    <p>
+      KSAN 임원으로서 네덜란드 한인 커뮤니티에 기여하고 싶으신가요?<br>
+      매년 6-7월에 신규 임원을 모집합니다.
+    </p>
+    <a href="contact.html" class="btn btn-primary btn-lg">관심 표명하기 →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <div>
+        <span class="footer-logo-box"><span>K</span></span>
+        <span style="color: white; font-size: 15px; font-weight: 500;">KSAN</span>
+      </div>
+      <p>네덜란드 한국 학생회</p>
+    </div>
+    <div class="footer-col">
+      <h4>SERVICES</h4>
+      <ul>
+        <li><a href="guide.html">정착 가이드</a></li>
+        <li><a href="business.html">Business Hub</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="pass-it-on.html">Pass It On</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>KSAN</h4>
+      <ul>
+        <li><a href="about.html">About KSAN</a></li>
+        <li><a href="events.html">이벤트</a></li>
+        <li><a href="partners.html">파트너사</a></li>
+        <li><a href="team.html">임원진</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACT</h4>
+      <ul>
+        <li><a href="contact.html">문의하기</a></li>
+        <li><a href="#">info@ksan.nl</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 KSAN. All rights reserved.</div>
+    <div>Rotterdam · Amsterdam · Eindhoven</div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

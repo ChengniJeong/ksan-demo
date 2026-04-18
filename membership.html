@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>멤버십 혜택 — KSAN</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .mem-hero {
+    background: linear-gradient(135deg, var(--black), #2A2A2A);
+    color: white;
+    padding: 80px 0 60px;
+    text-align: center;
+  }
+  .mem-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .mem-hero p {
+    color: rgba(255,255,255,0.8);
+    font-size: 17px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .pricing-section {
+    padding: 60px 0 80px;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .pricing-card {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 32px;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .pricing-card.featured {
+    border-color: var(--orange);
+    transform: scale(1.02);
+    box-shadow: 0 20px 60px rgba(232,104,42,0.15);
+  }
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  }
+  .pricing-card.featured:hover {
+    transform: scale(1.02) translateY(-4px);
+  }
+
+  .featured-label {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 16px;
+    background: var(--orange);
+    color: white;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+
+  .pricing-tier {
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pricing-name {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+  .pricing-desc {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 24px;
+  }
+  .pricing-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pricing-period {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 28px;
+  }
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+  .pricing-features li {
+    padding: 10px 0;
+    font-size: 13px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    border-bottom: 1px solid var(--light);
+  }
+  .pricing-features li:last-child { border-bottom: none; }
+  .pricing-features .check {
+    color: var(--orange);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .pricing-features li.disabled {
+    color: var(--gray-light);
+    text-decoration: line-through;
+  }
+  .pricing-features li.disabled .check {
+    color: var(--gray-light);
+  }
+
+  .pricing-cta {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    border: 1.5px solid var(--black);
+    background: white;
+    color: var(--black);
+    transition: all 0.2s;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+  }
+  .pricing-cta:hover {
+    background: var(--black);
+    color: white;
+  }
+  .pricing-cta.primary {
+    background: var(--orange);
+    color: white;
+    border-color: var(--orange);
+  }
+  .pricing-cta.primary:hover {
+    background: var(--orange-dark);
+    border-color: var(--orange-dark);
+  }
+
+  .comparison-section {
+    background: var(--light);
+    padding: 80px 0;
+  }
+  .comparison-table {
+    max-width: 900px;
+    margin: 40px auto 0;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  }
+  .comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .comparison-table th {
+    background: var(--black);
+    color: white;
+    padding: 20px 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .comparison-table th:first-child {
+    text-align: left;
+    background: var(--dark);
+  }
+  .comparison-table td {
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .comparison-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+    background: var(--light);
+  }
+  .comparison-table tr:last-child td { border-bottom: none; }
+  .check-yes { color: var(--orange); font-weight: 700; }
+  .check-no { color: var(--gray-light); }
+
+  .faq-section {
+    padding: 80px 0;
+  }
+  .faq-list {
+    max-width: 700px;
+    margin: 40px auto 0;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+  }
+  .faq-question {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-answer {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-card.featured { transform: none; }
+    .comparison-table { overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-box"><span>K</span></div>
+    <span class="nav-logo-text">네덜란드 한국 학생회</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">홈</a></li>
+    <li><a href="guide.html">정착 가이드</a></li>
+    <li><a href="business.html">Business Hub</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="events.html">이벤트</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-actions"></div>
+</nav>
+
+<section class="mem-hero">
+  <div class="container">
+    <h1>KSAN MEMBERSHIP</h1>
+    <p>네덜란드 한인 유학생을 위한 공식 멤버십.<br>한 번 결제로 평생 혜택.</p>
+  </div>
+</section>
+
+<section class="pricing-section">
+  <div class="container">
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-tier">🌱 LEVEL 0</div>
+        <h3 class="pricing-name">Guest</h3>
+        <p class="pricing-desc">유학 준비생 및 일반 이용자</p>
+        <div class="pricing-amount">FREE</div>
+        <div class="pricing-period">가입비 없음</div>
+        
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> 정착 가이드 열람</li>
+          <li><span class="check">✓</span> Community Q&A 질문하기</li>
+          <li><span class="check">✓</span> 유학 팁 콘텐츠 열람</li>
+          <li class="disabled"><span class="check">×</span> Business Hub 접근</li>
+          <li class="disabled"><span class="check">×</span> Pass It On 이용</li>
+          <li class="disabled"><span class="check">×</span> 이벤트 멤버 할인</li>
+          <li class="disabled"><span class="check">×</span> 파트너 할인</li>
+        </ul>
+
+        <a href="signup.html" class="pricing-cta">무료로 시작하기</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <span class="featured-label">MOST POPULAR</span>
+        <div class="pricing-tier">🎓 LEVEL 1</div>
+        <h3 class="pricing-name">Student</h3>
+        <p class="pricing-desc">네덜란드 재학생 (한국 국적)</p>
+        <div class="pricing-amount">€15</div>
+        <div class="pricing-period">평생 멤버십 (one-time)</div>
+        
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Guest 혜택 전체 포함</li>
+          <li><span class="check">✓</span> <strong>Business Hub 전체 열람</strong></li>
+          <li><span class="check">✓</span> <strong>Pass It On 이용</strong></li>
+          <li><span class="check">✓</span> 모든 이벤트 멤버 할인 (최대 40%)</li>
+          <li><span class="check">✓</span> 파트너 할인 (신라마켓, NordVPN 등)</li>
+          <li><span class="check">✓</span> 단체 항공권 공동구매 참여</li>
+          <li><span class="check">✓</span> 우선 신청 기회</li>
+        </ul>
+
+        <a href="signup.html" class="pricing-cta primary">€15에 시작하기</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-tier">🎉 LEVEL 2</div>
+        <h3 class="pricing-name">Alumni</h3>
+        <p class="pricing-desc">졸업한 Student 회원</p>
+        <div class="pricing-amount">FREE</div>
+        <div class="pricing-period">자동 전환 (별도 비용 없음)</div>
+        
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Student 혜택 대부분 유지</li>
+          <li><span class="check">✓</span> <strong>Alumni 전용 채용 공고 게재</strong></li>
+          <li><span class="check">✓</span> <strong>후배 멘토링 프로그램</strong></li>
+          <li><span class="check">✓</span> Alumni 전용 네트워킹 이벤트</li>
+          <li><span class="check">✓</span> KSAN 후원 세액공제</li>
+          <li><span class="check">✓</span> Alumni 디렉토리 접근</li>
+          <li><span class="check">✓</span> 연간 Yearbook 무료 발송</li>
+        </ul>
+
+        <a href="signup.html" class="pricing-cta">Alumni 전환 신청</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="comparison-section">
+  <div class="container">
+    <div style="text-align: center;">
+      <div class="section-label">COMPARE</div>
+      <h2 class="section-title">한눈에 보는 멤버십 비교</h2>
+    </div>
+
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>혜택</th>
+            <th>🌱 Guest</th>
+            <th style="background: var(--orange);">🎓 Student</th>
+            <th>🎉 Alumni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>정착 가이드 열람</td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Community Q&A 참여</td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Business Hub 공고 열람</td>
+            <td><span class="check-no">×</span></td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Pass It On 이용</td>
+            <td><span class="check-no">×</span></td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>이벤트 멤버 할인</td>
+            <td><span class="check-no">×</span></td>
+            <td>최대 40%</td>
+            <td>최대 40%</td>
+          </tr>
+          <tr>
+            <td>파트너 할인 혜택</td>
+            <td><span class="check-no">×</span></td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>단체 항공권 공동구매</td>
+            <td><span class="check-no">×</span></td>
+            <td><span class="check-yes">✓</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>멘토링 프로그램</td>
+            <td><span class="check-no">×</span></td>
+            <td>멘티만</td>
+            <td>멘토 가능</td>
+          </tr>
+          <tr>
+            <td>Alumni 디렉토리</td>
+            <td><span class="check-no">×</span></td>
+            <td><span class="check-no">×</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>채용 공고 게재 권한</td>
+            <td><span class="check-no">×</span></td>
+            <td><span class="check-no">×</span></td>
+            <td><span class="check-yes">✓</span></td>
+          </tr>
+          <tr style="background: var(--orange-pale);">
+            <td><strong>가격</strong></td>
+            <td><strong>무료</strong></td>
+            <td><strong>€15 (평생)</strong></td>
+            <td><strong>무료 (자동 전환)</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="container">
+    <div style="text-align: center;">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">자주 묻는 질문</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">€15는 매년 내야 하나요? <span>+</span></div>
+        <div class="faq-answer">
+          아니요! €15는 <strong>평생 한 번만</strong> 내는 금액입니다. 한 번 가입하면 졸업 후 Alumni로 전환되어도 추가 비용 없이 평생 이용 가능합니다.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Student에서 Alumni로 어떻게 전환되나요? <span>+</span></div>
+        <div class="faq-answer">
+          대학 졸업 후 마이페이지에서 전환 신청하시면 됩니다. 졸업 증명서를 업로드하면 3-5일 내 확인 후 자동 전환됩니다.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Student 가입 자격이 있나요? <span>+</span></div>
+        <div class="faq-answer">
+          네덜란드 고등교육기관에 정식 등록된 한국 국적 학생이면 누구나 가입 가능합니다. 교환학생, 한국학 전공자도 포함됩니다.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">환불이 가능한가요? <span>+</span></div>
+        <div class="faq-answer">
+          가입 후 7일 이내에는 100% 환불이 가능합니다. 이후에는 환불이 어려우니 신중하게 결정해주세요.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">기업도 가입할 수 있나요? <span>+</span></div>
+        <div class="faq-answer">
+          기업은 별도의 <strong>파트너십 프로그램</strong>을 통해 KSAN과 협력할 수 있습니다. <a href="contact.html" style="color: var(--orange);">파트너십 문의</a>를 참고해주세요.
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">결제는 어떻게 이루어지나요? <span>+</span></div>
+        <div class="faq-answer">
+          Stripe를 통해 안전하게 결제됩니다. 신용카드, 체크카드, iDeal 모두 지원합니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <div>
+        <span class="footer-logo-box"><span>K</span></span>
+        <span style="color: white; font-size: 15px; font-weight: 500;">KSAN</span>
+      </div>
+      <p>네덜란드 한국 학생회</p>
+    </div>
+    <div class="footer-col">
+      <h4>SERVICES</h4>
+      <ul>
+        <li><a href="guide.html">정착 가이드</a></li>
+        <li><a href="business.html">Business Hub</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="pass-it-on.html">Pass It On</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>KSAN</h4>
+      <ul>
+        <li><a href="about.html">About KSAN</a></li>
+        <li><a href="events.html">이벤트</a></li>
+        <li><a href="partners.html">파트너사</a></li>
+        <li><a href="team.html">임원진</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACT</h4>
+      <ul>
+        <li><a href="contact.html">문의하기</a></li>
+        <li><a href="#">info@ksan.nl</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 KSAN. All rights reserved.</div>
+    <div>Rotterdam · Amsterdam · Eindhoven</div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

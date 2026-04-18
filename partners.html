@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>파트너사 — KSAN</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .partners-hero {
+    background: linear-gradient(135deg, var(--black), #2A2A2A);
+    color: white;
+    padding: 80px 0 60px;
+  }
+  .partners-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+  .partners-hero p {
+    color: rgba(255,255,255,0.8);
+    font-size: 17px;
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .tier-section {
+    padding: 80px 0;
+  }
+  .tier-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+  }
+  .tier-badge {
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .tier-badge.platinum { background: #E5E4E2; color: #555; }
+  .tier-badge.gold { background: #FFD700; color: #7A5E00; }
+  .tier-badge.silver { background: #C0C0C0; color: #555; }
+  .tier-badge.bronze { background: #CD7F32; color: white; }
+  .tier-badge.public { background: var(--orange); color: white; }
+
+  .tier-header h2 {
+    font-size: 28px;
+    margin: 0;
+  }
+
+  .partner-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .partner-grid.large {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .partner-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .partner-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  }
+  .partner-logo {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  .partner-card h3 {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .partner-card p {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .partner-type {
+    display: inline-block;
+    padding: 3px 8px;
+    background: var(--light);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--gray);
+  }
+
+  .cta-become {
+    background: var(--orange-pale);
+    padding: 60px 0;
+    margin-top: 40px;
+  }
+  .cta-become-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .cta-become h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+  .cta-become p {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 32px 0;
+    text-align: left;
+  }
+  .benefit-item {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+  }
+  .benefit-item h4 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .benefit-item p {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .partner-grid, .partner-grid.large { grid-template-columns: 1fr 1fr; }
+    .benefits-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-box"><span>K</span></div>
+    <span class="nav-logo-text">네덜란드 한국 학생회</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">홈</a></li>
+    <li><a href="guide.html">정착 가이드</a></li>
+    <li><a href="business.html">Business Hub</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="events.html">이벤트</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-actions"></div>
+</nav>
+
+<section class="partners-hero">
+  <div class="container">
+    <div class="breadcrumb" style="color: rgba(255,255,255,0.5);">
+      <a href="index.html" style="color: rgba(255,255,255,0.5);">홈</a> / <span>파트너사</span>
+    </div>
+    <h1>OUR PARTNERS</h1>
+    <p>KSAN과 함께 네덜란드 한인 유학생의 삶을 지원하는 기업·기관들을 소개합니다.</p>
+  </div>
+</section>
+
+<section class="tier-section">
+  <div class="container">
+    <div class="tier-header">
+      <span class="tier-badge public">공공기관</span>
+      <h2>Official Partners</h2>
+    </div>
+
+    <div class="partner-grid large">
+      <div class="partner-card">
+        <div class="partner-logo">🏛️</div>
+        <h3>주네덜란드 한국 대사관</h3>
+        <p>KSAN 공식 후원 기관. 문화 행사 및 재외국민 활동 지원.</p>
+        <span class="partner-type">공공기관</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🏢</div>
+        <h3>KOTRA 암스테르담</h3>
+        <p>한-네 기업 연결 및 인턴십 프로그램 파트너.</p>
+        <span class="partner-type">공공기관</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🤝</div>
+        <h3>재네덜란드 한인회</h3>
+        <p>네덜란드 한인 커뮤니티 공식 협력 단체.</p>
+        <span class="partner-type">민간단체</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tier-section" style="background: var(--light);">
+  <div class="container">
+    <div class="tier-header">
+      <span class="tier-badge platinum">Platinum</span>
+      <h2>플래티넘 파트너</h2>
+    </div>
+
+    <div class="partner-grid">
+      <div class="partner-card">
+        <div class="partner-logo">📱</div>
+        <h3>Samsung Benelux</h3>
+        <p>채용 공고 우선 노출 + 메인 스폰서</p>
+        <span class="partner-type">대기업</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">💻</div>
+        <h3>LG Electronics Europe</h3>
+        <p>인턴십 프로그램 + 대규모 행사 후원</p>
+        <span class="partner-type">대기업</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">✈️</div>
+        <h3>대한항공 네덜란드</h3>
+        <p>단체 항공권 할인 + 행사 후원</p>
+        <span class="partner-type">항공사</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🛒</div>
+        <h3>신라마켓</h3>
+        <p>행사 식재료 후원 + 멤버 할인</p>
+        <span class="partner-type">유통</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tier-section">
+  <div class="container">
+    <div class="tier-header">
+      <span class="tier-badge gold">Gold</span>
+      <h2>골드 파트너</h2>
+    </div>
+
+    <div class="partner-grid">
+      <div class="partner-card">
+        <div class="partner-logo">🌐</div>
+        <h3>NordVPN</h3>
+        <p>멤버 전용 VPN 할인</p>
+        <span class="partner-type">IT</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🎵</div>
+        <h3>JBL Europe</h3>
+        <p>행사 상품 협찬</p>
+        <span class="partner-type">전자제품</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">💡</div>
+        <h3>Philips</h3>
+        <p>문화 행사 후원</p>
+        <span class="partner-type">전자제품</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🥫</div>
+        <h3>Daesang Europe</h3>
+        <p>한식 식재료 지원</p>
+        <span class="partner-type">식품</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tier-section" style="background: var(--light);">
+  <div class="container">
+    <div class="tier-header">
+      <span class="tier-badge silver">Silver</span>
+      <h2>실버 파트너</h2>
+    </div>
+
+    <div class="partner-grid">
+      <div class="partner-card">
+        <div class="partner-logo">🏦</div>
+        <h3>종가</h3>
+        <p>한식 재료 협찬</p>
+        <span class="partner-type">식품</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🎓</div>
+        <h3>암스테르담 한글학교</h3>
+        <p>한국어 강사 채용 연계</p>
+        <span class="partner-type">교육</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">📚</div>
+        <h3>Cargo King</h3>
+        <p>한국 택배 할인</p>
+        <span class="partner-type">물류</span>
+      </div>
+      <div class="partner-card">
+        <div class="partner-logo">🍜</div>
+        <h3>Toko Dun Yong</h3>
+        <p>아시아 식재료 할인</p>
+        <span class="partner-type">유통</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-become">
+  <div class="container">
+    <div class="cta-become-inner">
+      <h2>BECOME A PARTNER</h2>
+      <p>
+        KSAN과 함께 네덜란드 한인 유학생 500명 이상에게<br>
+        귀사의 브랜드와 서비스를 소개할 수 있습니다.
+      </p>
+
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <h4>🎯 타겟 접근</h4>
+          <p>20-30대 한인 유학생에게 직접적인 브랜드 노출</p>
+        </div>
+        <div class="benefit-item">
+          <h4>📢 다채널 노출</h4>
+          <p>웹사이트, SNS, 행사, 뉴스레터까지 통합 마케팅</p>
+        </div>
+        <div class="benefit-item">
+          <h4>🤝 신뢰 기반</h4>
+          <p>KSAN 인증 = 유학생들이 신뢰하는 브랜드</p>
+        </div>
+      </div>
+
+      <a href="contact.html" class="btn btn-primary btn-lg">파트너십 제안하기 →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <div>
+        <span class="footer-logo-box"><span>K</span></span>
+        <span style="color: white; font-size: 15px; font-weight: 500;">KSAN</span>
+      </div>
+      <p>네덜란드 한국 학생회</p>
+    </div>
+    <div class="footer-col">
+      <h4>SERVICES</h4>
+      <ul>
+        <li><a href="guide.html">정착 가이드</a></li>
+        <li><a href="business.html">Business Hub</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a href="pass-it-on.html">Pass It On</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>KSAN</h4>
+      <ul>
+        <li><a href="about.html">About KSAN</a></li>
+        <li><a href="events.html">이벤트</a></li>
+        <li><a href="partners.html">파트너사</a></li>
+        <li><a href="team.html">임원진</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACT</h4>
+      <ul>
+        <li><a href="contact.html">문의하기</a></li>
+        <li><a href="#">info@ksan.nl</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 KSAN. All rights reserved.</div>
+    <div>Rotterdam · Amsterdam · Eindhoven</div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

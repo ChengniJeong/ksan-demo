@@ -7,34 +7,245 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  .placeholder-hero {
-    background: linear-gradient(135deg, var(--light), white);
-    padding: 80px 0;
-    text-align: center;
+  .events-hero {
+    background: linear-gradient(135deg, #1A1A2E, #16213E);
+    color: white;
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
   }
-  .placeholder-icon { font-size: 80px; margin-bottom: 24px; }
-  .placeholder-hero h1 {
+  .events-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(232,104,42,0.2), transparent 60%);
+  }
+  .events-hero-content {
+    position: relative;
+    z-index: 2;
+  }
+  .events-hero h1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 56px;
+    font-size: 64px;
     letter-spacing: 2px;
     margin-bottom: 16px;
   }
-  .placeholder-hero p {
+  .events-hero p {
+    color: rgba(255,255,255,0.8);
     font-size: 17px;
-    color: var(--gray);
-    max-width: 500px;
-    margin: 0 auto 32px;
+    max-width: 600px;
     line-height: 1.7;
   }
-  .coming-soon {
-    display: inline-block;
-    padding: 8px 16px;
-    background: var(--orange-pale);
-    color: var(--orange);
+
+  .featured-event {
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
     border-radius: 20px;
-    font-size: 13px;
+    padding: 40px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 3;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    box-shadow: 0 20px 60px rgba(232,104,42,0.3);
+  }
+  .featured-tag {
+    display: inline-block;
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 100px;
+    font-size: 12px;
     font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .featured-event h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 1.5px;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .featured-event .subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 20px;
+  }
+  .featured-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
     margin-bottom: 24px;
+  }
+  .featured-info-item strong {
+    display: block;
+    font-size: 11px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .featured-info-item span {
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .featured-visual {
+    font-size: 180px;
+    text-align: center;
+  }
+  .btn-featured {
+    padding: 14px 28px;
+    background: white;
+    color: var(--orange);
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .events-section {
+    padding: 80px 0;
+  }
+
+  .event-tabs {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .event-tab {
+    padding: 12px 4px;
+    font-size: 15px;
+    color: var(--gray);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    font-family: inherit;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .event-tab.active {
+    color: var(--orange);
+    border-bottom-color: var(--orange);
+    font-weight: 600;
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+  .event-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .event-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+  }
+  .event-image {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    position: relative;
+  }
+  .event-image.orange { background: linear-gradient(135deg, var(--orange), var(--orange-dark)); }
+  .event-image.dark { background: linear-gradient(135deg, #2C3E50, #1A252F); }
+  .event-image.green { background: linear-gradient(135deg, #2D6A4F, #1B4332); }
+  .event-image.purple { background: linear-gradient(135deg, #6A4C93, #4A306D); }
+  .event-image.blue { background: linear-gradient(135deg, #1E3A8A, #1E40AF); }
+  .event-image.pink { background: linear-gradient(135deg, #EC4899, #BE185D); }
+
+  .event-date-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: white;
+    color: var(--black);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-family: 'Noto Sans KR';
+    font-size: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .event-date-badge strong {
+    display: block;
+    font-size: 18px;
+    color: var(--orange);
+  }
+
+  .event-body { padding: 20px 24px; }
+  .event-body h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .event-body .location {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 12px;
+  }
+  .event-body .desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .event-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+  .event-participants {
+    color: var(--gray);
+  }
+  .event-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+  }
+  .event-btn.open {
+    background: var(--orange);
+    color: white;
+  }
+  .event-btn.soon {
+    background: var(--light);
+    color: var(--gray);
+  }
+  .event-btn.closed {
+    background: var(--light);
+    color: var(--gray);
+    opacity: 0.6;
+  }
+
+  .past-event {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .featured-event { grid-template-columns: 1fr; text-align: center; }
+    .featured-visual { font-size: 120px; }
+    .events-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -50,19 +261,239 @@
     <li><a href="guide.html">정착 가이드</a></li>
     <li><a href="business.html">Business Hub</a></li>
     <li><a href="community.html">Community</a></li>
-    <li><a href="events.html">이벤트</a></li>
+    <li><a href="events.html" class="active">이벤트</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
   <div class="nav-actions"></div>
 </nav>
 
-<section class="placeholder-hero">
+<section class="events-hero">
   <div class="container">
-    <div class="placeholder-icon">🎉</div>
-    <div class="coming-soon">🚧 2차 개발 예정</div>
-    <h1>이벤트</h1>
-    <p>KSAN의 모든 이벤트 소식과 신청 페이지. 2차 개발 단계에서 구현 예정입니다.</p>
-    <a href="index.html" class="btn btn-primary btn-lg">홈으로 돌아가기</a>
+    <div class="events-hero-content">
+      <div class="breadcrumb" style="color: rgba(255,255,255,0.5);">
+        <a href="index.html" style="color: rgba(255,255,255,0.5);">홈</a> / <span>이벤트</span>
+      </div>
+      <h1>KSAN EVENTS</h1>
+      <p>네덜란드 한인 유학생들이 만나는 모든 순간.<br>
+      네트워킹부터 대규모 행사까지, 여기서 시작됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0;">
+  <div class="container">
+    <div class="featured-event">
+      <div>
+        <span class="featured-tag">🔥 FEATURED EVENT</span>
+        <h2>폭싹 뛰었수다</h2>
+        <p class="subtitle">제6회 KSAN 체육대회 🏃</p>
+        <div class="featured-info">
+          <div class="featured-info-item">
+            <strong>DATE</strong>
+            <span>2026.05.09 (토)</span>
+          </div>
+          <div class="featured-info-item">
+            <strong>TIME</strong>
+            <span>14:30 - 18:30</span>
+          </div>
+          <div class="featured-info-item">
+            <strong>LOCATION</strong>
+            <span>USC Universum, Amsterdam</span>
+          </div>
+          <div class="featured-info-item">
+            <strong>PRICE</strong>
+            <span>멤버 €5 / 비멤버 €8</span>
+          </div>
+        </div>
+        <button class="btn-featured">지금 신청하기 →</button>
+      </div>
+      <div class="featured-visual">🏃‍♀️</div>
+    </div>
+  </div>
+</section>
+
+<section class="events-section">
+  <div class="container">
+    <div class="event-tabs">
+      <button class="event-tab active">예정된 이벤트</button>
+      <button class="event-tab">지난 이벤트</button>
+    </div>
+
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-image orange">
+          <div class="event-date-badge">
+            <strong>05</strong>
+            MAY
+          </div>
+          체육대회
+        </div>
+        <div class="event-body">
+          <h3>폭싹 뛰었수다 🏃</h3>
+          <p class="location">USC Universum · Amsterdam</p>
+          <p class="desc">연 1회 KSAN 최대 행사. 종목별 팀 경기와 상품 추첨으로 꽉 찬 하루!</p>
+          <div class="event-status">
+            <span class="event-participants">👥 47 / 80명</span>
+            <button class="event-btn open">신청 가능</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-image dark">
+          <div class="event-date-badge">
+            <strong>06</strong>
+            JUN
+          </div>
+          Summer Night
+        </div>
+        <div class="event-body">
+          <h3>Summer Night 🌃</h3>
+          <p class="location">Amsterdam · 장소 미정</p>
+          <p class="desc">여름 시즌 오프닝 네트워킹 파티. 루프탑에서 만나는 한인 유학생 밤.</p>
+          <div class="event-status">
+            <span class="event-participants">곧 공개</span>
+            <button class="event-btn soon">알림 받기</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-image green">
+          <div class="event-date-badge">
+            <strong>07</strong>
+            JUL
+          </div>
+          포차나잇
+        </div>
+        <div class="event-body">
+          <h3>Pocha Night 🍻</h3>
+          <p class="location">Rotterdam · 한국식 포장마차</p>
+          <p class="desc">종로 감성으로 꾸민 포차에서 한잔. 작지만 진한 네트워킹!</p>
+          <div class="event-status">
+            <span class="event-participants">기획 중</span>
+            <button class="event-btn soon">알림 받기</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-image purple">
+          <div class="event-date-badge">
+            <strong>08</strong>
+            AUG
+          </div>
+          오리엔테이션
+        </div>
+        <div class="event-body">
+          <h3>2026 KSAN 오리엔테이션 🎓</h3>
+          <p class="location">온라인 (Zoom)</p>
+          <p class="desc">새 학기 시작 전, 신입생들을 위한 네덜란드 유학 생활 필수 정보.</p>
+          <div class="event-status">
+            <span class="event-participants">무료</span>
+            <button class="event-btn soon">알림 받기</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-image blue">
+          <div class="event-date-badge">
+            <strong>09</strong>
+            SEP
+          </div>
+          네트워킹
+        </div>
+        <div class="event-body">
+          <h3>가을 네트워킹 파티 🍁</h3>
+          <p class="location">Amsterdam · 장소 미정</p>
+          <p class="desc">개강 시즌, 새 학기 새 친구들. 신입생 환영 네트워킹!</p>
+          <div class="event-status">
+            <span class="event-participants">기획 중</span>
+            <button class="event-btn soon">알림 받기</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-image pink">
+          <div class="event-date-badge">
+            <strong>12</strong>
+            DEC
+          </div>
+          GALA
+        </div>
+        <div class="event-body">
+          <h3>KSAN GALA 2026 ✨</h3>
+          <p class="location">Amsterdam · 이벤트 홀</p>
+          <p class="desc">KSAN 연말 시그니처 이벤트. 드레스코드 있는 정식 만찬.</p>
+          <div class="event-status">
+            <span class="event-participants">기획 중</span>
+            <button class="event-btn soon">알림 받기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="font-size: 22px; margin-top: 60px; margin-bottom: 24px; color: var(--gray);">지난 이벤트</h2>
+    <div class="events-grid">
+      <div class="event-card past-event">
+        <div class="event-image" style="background: linear-gradient(135deg, #888, #555);">
+          <div class="event-date-badge">
+            <strong>05</strong>
+            2025
+          </div>
+          제5회 체육대회
+        </div>
+        <div class="event-body">
+          <h3>2025 KSAN 체육대회</h3>
+          <p class="location">USC Universum · Amsterdam</p>
+          <p class="desc">작년 체육대회. 72명 참가. 가장 뜨거웠던 하루.</p>
+          <div class="event-status">
+            <span class="event-participants">👥 72명 참가</span>
+            <button class="event-btn closed">종료</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card past-event">
+        <div class="event-image" style="background: linear-gradient(135deg, #888, #555);">
+          <div class="event-date-badge">
+            <strong>09</strong>
+            2025
+          </div>
+          네트워킹
+        </div>
+        <div class="event-body">
+          <h3>2025 가을 네트워킹</h3>
+          <p class="location">Amsterdam</p>
+          <p class="desc">개강 기념 네트워킹 파티. 신입생들과 선배들의 만남.</p>
+          <div class="event-status">
+            <span class="event-participants">👥 45명 참가</span>
+            <button class="event-btn closed">종료</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card past-event">
+        <div class="event-image" style="background: linear-gradient(135deg, #888, #555);">
+          <div class="event-date-badge">
+            <strong>12</strong>
+            2025
+          </div>
+          연말 파티
+        </div>
+        <div class="event-body">
+          <h3>2025 연말 파티 🎄</h3>
+          <p class="location">Rotterdam</p>
+          <p class="desc">한 해 마무리 파티. 임원진과 회원들의 송년회.</p>
+          <div class="event-status">
+            <span class="event-participants">👥 38명 참가</span>
+            <button class="event-btn closed">종료</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -89,11 +520,14 @@
       <ul>
         <li><a href="about.html">About KSAN</a></li>
         <li><a href="events.html">이벤트</a></li>
+        <li><a href="partners.html">파트너사</a></li>
+        <li><a href="team.html">임원진</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>CONTACT</h4>
       <ul>
+        <li><a href="contact.html">문의하기</a></li>
         <li><a href="#">info@ksan.nl</a></li>
       </ul>
     </div>

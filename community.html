@@ -7,34 +7,185 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  .placeholder-hero {
-    background: linear-gradient(135deg, var(--light), white);
-    padding: 80px 0;
-    text-align: center;
+  .comm-hero {
+    background: linear-gradient(135deg, #2D6A4F, #40916C);
+    color: white;
+    padding: 60px 0 40px;
   }
-  .placeholder-icon { font-size: 80px; margin-bottom: 24px; }
-  .placeholder-hero h1 {
+  .comm-hero h1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 56px;
-    letter-spacing: 2px;
+    font-size: 52px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .comm-hero p {
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    max-width: 600px;
+  }
+
+  .comm-tabs {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 64px;
+    z-index: 10;
+  }
+  .comm-tab-row {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .comm-tab {
+    padding: 16px 24px;
+    font-size: 14px;
+    color: var(--gray);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: inherit;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .comm-tab:hover { color: var(--black); }
+  .comm-tab.active {
+    color: var(--orange);
+    border-bottom-color: var(--orange);
+    font-weight: 600;
+  }
+  .comm-tab .count {
+    margin-left: 6px;
+    padding: 2px 8px;
+    background: var(--light);
+    border-radius: 12px;
+    font-size: 11px;
+  }
+
+  .comm-main {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 32px;
+    margin-top: 32px;
+  }
+
+  .post-list { }
+
+  .post-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .post-item:hover {
+    border-color: var(--orange);
+    transform: translateY(-1px);
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+  .post-category {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .post-category.qna { background: #E3F2FD; color: #1976D2; }
+  .post-category.life { background: var(--orange-pale); color: var(--orange); }
+  .post-category.tips { background: #E8F5E8; color: #2E7D32; }
+  .post-category.free { background: #F3E5F5; color: #7B1FA2; }
+  .post-author { color: var(--gray); }
+  .post-time { color: var(--gray-light); margin-left: auto; }
+
+  .post-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .post-preview {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .post-stats {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--gray);
+  }
+  .post-stats span { display: flex; align-items: center; gap: 4px; }
+
+  .post-item.pinned {
+    border-color: var(--orange);
+    background: var(--orange-pale);
+  }
+  .pinned-label {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--orange);
+    color: white;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+
+  .sidebar-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
     margin-bottom: 16px;
   }
-  .placeholder-hero p {
-    font-size: 17px;
-    color: var(--gray);
-    max-width: 500px;
-    margin: 0 auto 32px;
-    line-height: 1.7;
+  .sidebar-card h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
-  .coming-soon {
-    display: inline-block;
-    padding: 8px 16px;
-    background: var(--orange-pale);
-    color: var(--orange);
-    border-radius: 20px;
+
+  .hot-topic {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
     font-size: 13px;
+  }
+  .hot-topic:last-child { border-bottom: none; }
+  .hot-num {
+    color: var(--orange);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .write-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
     font-weight: 600;
-    margin-bottom: 24px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    font-family: inherit;
+  }
+  .write-btn:hover { background: var(--orange-dark); }
+
+  @media (max-width: 768px) {
+    .comm-main { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -49,20 +200,208 @@
     <li><a href="index.html">홈</a></li>
     <li><a href="guide.html">정착 가이드</a></li>
     <li><a href="business.html">Business Hub</a></li>
-    <li><a href="community.html">Community</a></li>
+    <li><a href="community.html" class="active">Community</a></li>
     <li><a href="events.html">이벤트</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
   <div class="nav-actions"></div>
 </nav>
 
-<section class="placeholder-hero">
+<section class="comm-hero">
   <div class="container">
-    <div class="placeholder-icon">💬</div>
-    <div class="coming-soon">🚧 2차 개발 예정</div>
+    <div class="breadcrumb" style="color: rgba(255,255,255,0.5);">
+      <a href="index.html" style="color: rgba(255,255,255,0.5);">홈</a> / <span>Community</span>
+    </div>
     <h1>Community</h1>
-    <p>익명 고민 상담, Q&A, 자유 게시판이 여기에 만들어집니다. 2차 개발 단계에서 구현 예정입니다.</p>
-    <a href="index.html" class="btn btn-primary btn-lg">홈으로 돌아가기</a>
+    <p>네덜란드 한인 유학생들의 솔직한 대화. 질문, 고민, 일상 모든 이야기가 여기에.</p>
+  </div>
+</section>
+
+<div class="comm-tabs">
+  <div class="container">
+    <div class="comm-tab-row">
+      <button class="comm-tab active">전체 <span class="count">234</span></button>
+      <button class="comm-tab">💬 익명 고민 <span class="count">42</span></button>
+      <button class="comm-tab">❓ Q&A <span class="count">89</span></button>
+      <button class="comm-tab">💡 유학 팁 <span class="count">51</span></button>
+      <button class="comm-tab">🎈 자유 게시판 <span class="count">52</span></button>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="comm-main">
+      <div class="post-list">
+        <div class="post-item pinned">
+          <div class="post-meta">
+            <span class="pinned-label">📌 공지</span>
+            <span class="post-category tips">💡 유학 팁</span>
+            <span class="post-author">KSAN 운영진</span>
+            <span class="post-time">2일 전</span>
+          </div>
+          <h3 class="post-title">[필독] 커뮤니티 이용 가이드 및 규칙</h3>
+          <p class="post-preview">KSAN Community는 네덜란드 한인 유학생들의 건강한 소통을 위한 공간입니다. 서로 존중하며...</p>
+          <div class="post-stats">
+            <span>👁 1,234</span>
+            <span>💬 8</span>
+            <span>❤️ 67</span>
+          </div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-meta">
+            <span class="post-category qna">❓ Q&A</span>
+            <span class="post-author">익명</span>
+            <span class="post-time">3시간 전</span>
+          </div>
+          <h3 class="post-title">BSN 신청할 때 출생증명서 apostille 꼭 필요한가요?</h3>
+          <p class="post-preview">다음 주에 Gemeente 예약해뒀는데, 출생증명서는 준비했고 apostille가 없어요. 없이 가면 돌려보내나요?</p>
+          <div class="post-stats">
+            <span>👁 89</span>
+            <span>💬 12</span>
+            <span>❤️ 23</span>
+          </div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-meta">
+            <span class="post-category life">💬 익명 고민</span>
+            <span class="post-author">익명</span>
+            <span class="post-time">5시간 전</span>
+          </div>
+          <h3 class="post-title">네덜란드 와서 3개월째인데 너무 외로워요</h3>
+          <p class="post-preview">학교 친구 사귀기도 어렵고, 한국 가족이랑 시차 때문에 통화도 쉽지 않고... 혹시 비슷한 시기 겪으셨던 분들 어떻게 극복하셨어요?</p>
+          <div class="post-stats">
+            <span>👁 456</span>
+            <span>💬 34</span>
+            <span>❤️ 178</span>
+          </div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-meta">
+            <span class="post-category tips">💡 유학 팁</span>
+            <span class="post-author">박○○</span>
+            <span class="post-time">1일 전</span>
+          </div>
+          <h3 class="post-title">ING 학생 계좌 개설 후기 (+ 수수료 비교)</h3>
+          <p class="post-preview">지난주에 드디어 ING 학생 계좌 개설했어요! 필요 서류랑 과정, ABN AMRO랑 비교한 수수료까지 정리해봤습니다.</p>
+          <div class="post-stats">
+            <span>👁 678</span>
+            <span>💬 21</span>
+            <span>❤️ 134</span>
+          </div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-meta">
+            <span class="post-category free">🎈 자유게시판</span>
+            <span class="post-author">김○○</span>
+            <span class="post-time">1일 전</span>
+          </div>
+          <h3 class="post-title">이번 주말에 암스테르담 근처 튤립 구경 같이 가실 분!</h3>
+          <p class="post-preview">4월이라 Keukenhof 가기 딱 좋을 것 같은데 혼자 가기 좀 그래서... Rotterdam이나 Amsterdam에서 출발하실 분?</p>
+          <div class="post-stats">
+            <span>👁 234</span>
+            <span>💬 15</span>
+            <span>❤️ 45</span>
+          </div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-meta">
+            <span class="post-category qna">❓ Q&A</span>
+            <span class="post-author">이○○</span>
+            <span class="post-time">2일 전</span>
+          </div>
+          <h3 class="post-title">Kamernet 사기 당한 것 같아요... 도움 요청</h3>
+          <p class="post-preview">보증금 €800 보냈는데 연락이 안 되네요. 계약서 서명은 아직 안 했어요. 어떻게 해야 하나요?</p>
+          <div class="post-stats">
+            <span>👁 892</span>
+            <span>💬 47</span>
+            <span>❤️ 89</span>
+          </div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-meta">
+            <span class="post-category life">💬 익명 고민</span>
+            <span class="post-author">익명</span>
+            <span class="post-time">2일 전</span>
+          </div>
+          <h3 class="post-title">부모님께 자퇴 얘기 어떻게 꺼내야 할까요</h3>
+          <p class="post-preview">네덜란드 온 지 1년 반인데 적성에 안 맞는 것 같아서... 한국 돌아가서 다시 준비하고 싶은데 부모님 설득이 너무 어려워요.</p>
+          <div class="post-stats">
+            <span>👁 567</span>
+            <span>💬 28</span>
+            <span>❤️ 203</span>
+          </div>
+        </div>
+
+        <div class="post-item">
+          <div class="post-meta">
+            <span class="post-category tips">💡 유학 팁</span>
+            <span class="post-author">정○○</span>
+            <span class="post-time">3일 전</span>
+          </div>
+          <h3 class="post-title">네덜란드에서 한국 택배 받는 법 (싸게!)</h3>
+          <p class="post-preview">엄마가 김치랑 반찬 보내주시는데 DHL은 너무 비싸고... Shipito, MyUS, 우체국 EMS 다 써본 후기입니다.</p>
+          <div class="post-stats">
+            <span>👁 1,234</span>
+            <span>💬 56</span>
+            <span>❤️ 289</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button class="write-btn">✏️ 글 쓰기</button>
+
+        <div class="sidebar-card">
+          <h3>🔥 이번 주 핫이슈</h3>
+          <div class="hot-topic">
+            <span class="hot-num">1</span>
+            <span>네덜란드 대학 내년 학비 인상?</span>
+          </div>
+          <div class="hot-topic">
+            <span class="hot-num">2</span>
+            <span>Kamernet 사기 주의보 (피해자 모임)</span>
+          </div>
+          <div class="hot-topic">
+            <span class="hot-num">3</span>
+            <span>여름 한국 귀국 항공권 공동구매</span>
+          </div>
+          <div class="hot-topic">
+            <span class="hot-num">4</span>
+            <span>ING vs ABN AMRO 학생 계좌 비교</span>
+          </div>
+          <div class="hot-topic">
+            <span class="hot-num">5</span>
+            <span>Schiphol 한국 식료품 반입 규정</span>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>📊 이번 주 활동</h3>
+          <div style="font-size: 13px; line-height: 1.8; color: var(--gray);">
+            <div>새 글 <strong style="color: var(--black);">47건</strong></div>
+            <div>댓글 <strong style="color: var(--black);">312건</strong></div>
+            <div>새 멤버 <strong style="color: var(--black);">23명</strong></div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>⚠️ 커뮤니티 규칙</h3>
+          <div style="font-size: 12px; line-height: 1.7; color: var(--gray);">
+            <p>• 서로 존중하는 말투</p>
+            <p>• 개인정보 공개 금지</p>
+            <p>• 광고/홍보글 금지</p>
+            <p>• 익명 게시물은 학생회만 확인</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -89,11 +428,14 @@
       <ul>
         <li><a href="about.html">About KSAN</a></li>
         <li><a href="events.html">이벤트</a></li>
+        <li><a href="partners.html">파트너사</a></li>
+        <li><a href="team.html">임원진</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>CONTACT</h4>
       <ul>
+        <li><a href="contact.html">문의하기</a></li>
         <li><a href="#">info@ksan.nl</a></li>
       </ul>
     </div>
